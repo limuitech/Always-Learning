@@ -1,15 +1,5 @@
 # 404 Not Found的知识库
-最近更新日期：2019/05/21
-
-近日在学：
-- [大数据威胁建模方法论](https://www.cdxy.me/?p=797)（学到了很多）
-- [安全日志维度随想](https://www.cdxy.me/?p=793)
-- [机器学习加持下的时序类数据异常智能监控](http://m.koo4.cn/ppt_全/AICon%20全球人工智能与机器学习技术大会深度培训/腾讯%20刘彪《机器学习加持下的时序类数据异常智能监控》.pdf)
-- [海量运维日志异常挖掘](http://m.koo4.cn/ppt_全/Gdevops全球敏捷运维峰会成都站（Gdevops%202017）/知道创宇%20%20邓金城%20-%20海量运维日志异常挖掘.pdf)
-- [风控用户识别方法](http://www.shataowei.com/2017/12/09/风控用户识别方法/)
-- [github:sladesha](https://github.com/sladesha/Frcwp)
-- [多算法识别撞库刷券等异常用户](http://www.shataowei.com/2017/12/01/多算法识别撞库刷券等异常用户/)
-- [数据预处理-异常值识别](http://www.shataowei.com/2017/08/09/数据预处理-异常值识别/)
+最近更新日期：2019/07/04
 
 ## 硬实力
 - [计算机理论基础](#计算机理论基础)
@@ -28,9 +18,8 @@
   - [工具](#工具)
   	- [MAC](#MAC)
 	- [大数据技术工具](#大数据技术工具)
-	  - [Agent类型](#Agent)
-	  - [中间件类型](#中间件)
 	- [Git](#Git)
+	- [Wireshark](#Wireshark)
   - [技术](#技术)
 	- [浏览器技术](#浏览器技术) 
   	- [docker技术](#docker技术)
@@ -40,6 +29,7 @@
   	  - [Nginx](Nginx)
   	  - [Gunicorn](Gunicorn)
 	- [Kerberos](#Kerberos)
+	- [微服务架构](#微服务架构)
 - [底层研究](#底层研究)
 - [安全技术](#安全技术)
   - [Web安全](#Web安全)
@@ -184,6 +174,7 @@ Spring—》Spring MVC—》Spring Boot。
 **大数据技术工具-Agent类型**：看需求，logstash和flume都是作为agent的存在，logstash有更多的插件，有更好的配套产品elasticsearch等，但是logstash的开发语言是ruby，运行环境是JRuby，而且传输数据可能会丢失；flume内部有机制确保传输一定量级数据不丢失的问题，flume的开发语言是Java，易于二次开发，但是不足是jvm占用内存有点大。
 - [常用 Git 命令单](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)<br>
 **Git**：远程仓库-》本地仓库-〉暂存区-》工作区，git add .、git commit -m message、git push。
+- [tshark统计分析pcap包](https://www.wireshark.org/docs/man-pages/tshark.html)
 ### 技术
 - [解码与xss](https://blog.csdn.net/he_and/article/details/80588409)(**原文中有一处错误“html实体编码后“应该是`&#x5c;&#x75;&#x37;&#x32;` 产生的原因就是浏览器的html自解码**)<br>
 **浏览器技术-解码顺序**：浏览器解码主要涉及到两个部分：渲染引擎和js解析器。解码顺序：在什么环境下就进行什么解码，解码顺序为：最外层的环境对应的编码最先解码。举个例子:在`<a href=javascript:alert(1)>click</a>`中alert(1)处在html->url->js环境中。
@@ -207,6 +198,7 @@ Spring—》Spring MVC—》Spring Boot。
 **应用服务器**：Nginx部署场景：负载均衡（tornado之类的框架只支持单核，所以多进程部署需要反向负载均衡。gunicorn本身就是多进程其实不需要）、静态文件支持、抗并发压力、额外的访问控制。
 - [维基百科：Kerberos](https://zh.wikipedia.org/wiki/Kerberos)<br>
 **Kerberos**：Kerberos的基本描述、协议内容和具体流程。
+- [什么是微服务架构？](https://www.zhihu.com/question/65502802)
 
 ## 底层研究
 - [python requests库流程简析](https://www.jianshu.com/p/a5e98489dcb8)<br>
@@ -249,6 +241,7 @@ Spring—》Spring MVC—》Spring Boot。
 ### 数据安全
 - [NO.27 闲扯 关于数据安全](https://zhuanlan.zhihu.com/p/58146084?utm_source=wechat_session&utm_medium=social&utm_oi=663312716719067136)<br>
 大数据技术、时代，**数据是很多公司最核心的资产**；传统的安全边界模糊，我们需要假设我们边界已经被渗透的同时，拥有纵深防御能力，保护信息的安全。所以在加强传统安全手段的同时，我们更应该直接把安全的重点放在数据本身上，这就是数据安全所做的工作。在做之前，有一个前提：我们要知道安全依然是为业务服务的（大部分企业安全情况下，业务>安全），所以要权衡安全性和可用性。目前企业常用的措施主要有：数据分级、数据生命周期管理、数据脱敏&数据加密、数据防泄漏。
+- [互联网企业数据安全体系建设](https://tech.meituan.com/2018/05/24/data-security-system-construction.html)
 ### 渗透测试
 - [一套实用的渗透测试岗位面试题](https://mp.weixin.qq.com/s/KZn6p5sk1Ae9i3m4e-XCpg)<br>
 代码执行函数：`eval、preg_replace+/e、assert、call_user_func、call_user_func_array、create_function`；命令执行函数：`system、exec、shell_exec、passthru、pcntl_exec、popen、proc_open`；img标签除了onerror属性外，还有其他获取管理员路径的方式吗？src指定一个远程的脚本文件，获取referer。
@@ -298,6 +291,15 @@ Red Team的定义--->Red Team的目标（学习和利用已知真实攻击者的
 - [异常检测算法之IsolationForest](https://github.com/mylamour/blog/issues/27)
 - [异常挖掘，Isolation Forest](https://www.jianshu.com/p/1b020e2605e2)
 - [异常检测初尝试](https://iami.xyz/Inlier-Outlier-Detection/)
+- [机器学习加持下的时序类数据异常智能监控](http://m.koo4.cn/ppt_全/AICon%20全球人工智能与机器学习技术大会深度培训/腾讯%20刘彪《机器学习加持下的时序类数据异常智能监控》.pdf)
+- [海量运维日志异常挖掘](http://m.koo4.cn/ppt_全/Gdevops全球敏捷运维峰会成都站（Gdevops%202017）/知道创宇%20%20邓金城%20-%20海量运维日志异常挖掘.pdf)
+- [数据预处理-异常值识别](http://www.shataowei.com/2017/08/09/数据预处理-异常值识别/)
+- [Abnormal Detection（异常检测）和 Supervised Learning（有监督训练）在异常检测上的应用初探](https://www.cnblogs.com/LittleHann/p/7086851.html#_label3_6_3_0)
+- [数据挖掘中常见的「异常检测」算法有哪些？ - 微调的回答 - 知乎](https://www.zhihu.com/question/280696035/answer/417091151)<br>
+1、介绍常见的无监督异常检测算法及实验；2、对比多种算法的检测能力；3、对比多种算法的运算开销；4、总结并归纳如何处理异常检测问题。1.1）统计与概率模型：假设分布与假设检验，一维与多维，特征独立与特征相关，欧式距离与马氏距离；线性模型：低维空间嵌入，特征向量特征空间与协方差矩阵，欧式距离与马氏距离，PCA与Soft PCA与One-Class SVM；基于相似度衡量的模型：密度、距离、夹角、划分超平面、聚类；集成异常检测与模型融合。1.2）从实验结果图的决策边界验证算法之间的联系性。2.1）模型检测效果对比，Isolation Forest和KNN表现稳定；基于距离度量的KNN等模型受数据维度影响较大。3.1）数据量和数据维度对算法开销也有影响。Isolation更适合高维空间。4.1）实验结果带来了异常检测模型选择的思路：中小数据集KNN和MCD比较稳定，中大数据集Isolation Forest稳定；模型效果与模型效率往往是对立的，比如PCA与MCD；异常检测往往是非监督的，因此稳定比忽高忽低的性能更重要；简单的模型效果也可能很好。4.2）对于一个全新的异常检测问题，可以遵循以下步骤分析：A、对数据的了解，数据的分布，异常的分布，可根据假设选择模型；B、解决的问题是否有标签，如果有，一定不能浪费；C、如果可能的话，尝试不同的算法，尤其是对数据的了解有限时；D、根据数据的特点选择算法；E、无监督异常检测模型验证结果并不容易，可采用半自动的方式，对于置信度高的放过，对置信度低的人工审核；F、异常的趋势和特征往往在不断变化，因此模型需要重训练及调整策略；G、不要完全依赖模型，尝试使用半自动化的策略：人工规则+检测模型。人工规则还是很有用的，不要尝试一步到位的使用数据策略代替现有规则。
+- [梳理 | 异常检测](https://www.zuozuovera.com/archives/1395/)
+- [Anomaly Detection Isolation Forest&Visualization ](https://www.kaggle.com/adithya44/anomaly-detection-isolation-forest-visualization)
+- [Anomaly Detection with Time Series Forecasting](https://www.kaggle.com/adithya44/anomaly-detection-with-time-series-forecasting)
 ### 图与安全
 - [图/Louvain/DGA乱谈](https://www.cdxy.me/?p=805)<br>
 图承载者拓扑信息，而拓扑信息可以看作一种特征维度，有些攻防场景有明显的拓扑特征。Louvain算法的关键点是图的边的权重，在具体的攻防场景下需要专门研究，例如在DGA场景下，域名A与B的相关性(weight)=同时访问过A和B域名的IP数量。cdxy师傅用SQL实现了这种逻辑。
@@ -311,6 +313,7 @@ Red Team的定义--->Red Team的目标（学习和利用已知真实攻击者的
 - [Categories of algorithms non exhaustive ](https://static.coggle.it/diagram/WHeBqDIrJRk-kDDY)(学到了)<br>
 **人工智能-算法体系**：学到了搭建自己的算法体系。
 ### 基础知识
+- [欧氏距离与马氏距离](https://blog.csdn.net/u010167269/article/details/51627338)
 - [分类模型评估之ROC-AUC曲线和PRC曲线](https://blog.csdn.net/pipisorry/article/details/51788927)<br>
 - [SVM和logistic回归分别在什么情况下使用？](https://www.zhihu.com/question/21704547)<br>
 **算法使用场景-SVM和逻辑回归使用场景**：需要根据特征数量和训练样本数量来确定。如果特征数相对于训练样本数已经够大了，使用线性模型就能取得不错的效果，不需要过于复杂的模型，则使用LR或线性核函数的SVM。如果训练样本足够大而特征数较小的情况下，可以通过复杂核函数的SVM来获得更好的预测性能，如果样本没有达到百万级，使用复杂核函数的SVM也不会导致运算过慢。如果训练样本特别大，使用复杂核函数的SVM已经会导致运算过慢了，因此应该考虑引入更多特征，然后使用线性SVM或者LR来构造模型。
@@ -414,6 +417,13 @@ Red Team的定义--->Red Team的目标（学习和利用已知真实攻击者的
 - [快速搭建一个轻量级OpenSOC架构的数据分析框架（一）](https://xz.aliyun.com/t/2201)(学到了)<br>
 **框架**：**行文思路：由粗变细（由框架到举例子（由框架到场景到实际架构））。OpenSOC介绍（框架组成和工作流程）---》构建轻量级OpenSOC（聚焦具体场景和工具及具体架构）---》搭建步骤（每一步的环境搭建及配置）---》效果展示。**
 - [先知talk：从数据视角探索安全威胁](https://www.cdxy.me/?p=791)
+- [大数据威胁建模方法论](https://www.cdxy.me/?p=797)（学到了很多）
+- [安全日志维度随想](https://www.cdxy.me/?p=793)
+- [数据安全分析思想探索](https://www.freebuf.com/articles/database/176913.html)
+- [DataCon 2019: 1st place solution of malicious DNS traffic & DGA analysis](https://www.cdxy.me/?p=806)（学到了）<br>
+**我的理解**：涉及的知识点有：安全场景：DNS安全；数据处理：tshark工具的使用，MaxCompute和SQL的使用，PAI预分析和可视化；特征工程：DNS_type、src_ip维度的特征；异常检测算法：单特征3sigma检测；人工提取特征规则。<br>
+第一小题DNS恶意流量的异常检测：个人吸收80%，整理流程无障碍，每步流程中的**细节和工具**还未完全掌握，比如DNS安全场景了解不全面、tshark的大量数据解析、统计特征的全面提取、SQL语句做特征化；<br>
+第二小题DGA的多分类：个人吸收50%，流程搞懂了，但是对一些问题的理解还不到位，比如社区算法
 ### 安全场景
 - [关于风控预警体系的搭建方案](https://mp.weixin.qq.com/s/2r61XB_Po4s3ihkLy46xbA)<br>
 **业务安全-风控**：快速发现异常和准确定义风险。通过核心指标的变化发现异常片段及实体、通过聚类手段发现异常簇下全部实体；异常实体抽样--->无感知人工审核--->有针对性制定风险阈值
@@ -421,6 +431,9 @@ Red Team的定义--->Red Team的目标（学习和利用已知真实攻击者的
 **业务安全-风控**：风控领域斗争日趋激烈，黑产已经从高度专业化、分工明确的团伙进化为产业化运作的公司，现在风控需要有基础安全技术支撑（传统安全），随着司法机关对黑灰产的高压打击，未来大企业会关注风控供应商的产品能力和合规合法性。
 - [风控模型师面试准备--技术篇](https://zhuanlan.zhihu.com/p/56175215)
 - [风控模型实战--"魔镜杯"风控算法大赛](https://zhuanlan.zhihu.com/p/56864235)
+- [风控用户识别方法](http://www.shataowei.com/2017/12/09/风控用户识别方法/)
+- [github:sladesha](https://github.com/sladesha/Frcwp)
+- [多算法识别撞库刷券等异常用户](http://www.shataowei.com/2017/12/01/多算法识别撞库刷券等异常用户/)
 - [DNS Tunnel隧道隐蔽通信实验 && 尝试复现特征向量化思维方式检测](https://www.cnblogs.com/LittleHann/p/8656621.html)<br>
 **DNS隧道检测**：
 ### 安全系统
@@ -489,6 +502,8 @@ Red Team的定义--->Red Team的目标（学习和利用已知真实攻击者的
 **技术栈**：Jason Trost，专注于安全研究、大数据、云计算、机器学习，即安全数据科学。
 - [http://cyberdatascientist.com](http://cyberdatascientist.com)<br>
 **站点概括**：专注于安全数据科学，提供网络安全、统计学和AI等学习资料，并提供14个安全数据集，包括：垃圾邮件、恶意网站、恶意软件、Botnet等。**没有secrepo.com提供的资料全面**。
+- [https://towardsdatascience.com](https://towardsdatascience.com)<br>
+**站点概括**：专注于数据科学。
 ### 国内优秀技术人
 - [http://michael282694.com](http://michael282694.com)<br>
 **技术栈**：michael282694，数据分析挖掘产品开发、爬虫、Java、Python
@@ -504,7 +519,10 @@ Red Team的定义--->Red Team的目标（学习和利用已知真实攻击者的
 **技术栈**：iami，主要研究Web安全、机器学习，喜欢Python和Go。一直偷学师傅的博客。
 - [https://www.cdxy.me](https://www.cdxy.me)<br>
 **技术栈**：cdxy，早先主要做Web安全，CTF，代码审计，现在主要做安全研究与数据分析，初步估算技术领先我1～2年，师傅别学了。
-
+- [http://www.csuldw.com](http://www.csuldw.com)<br>
+**技术栈**：csuldw，专注于机器学习、数据挖掘、人工智能。
+- [https://molunerfinn.com/](https://molunerfinn.com/)
+**技术栈**：molunerfinn，专注于前端，北邮大佬，和404notfound同级
 ## 挖坑
 - [Efficient and Flexible Discovery of PHP Vulnerability译文](https://mp.weixin.qq.com/s/xMoDTEvj91RgXFXfykS9tQ)
 - [Efficient and Flexible Discovery of PHP Application Vulnerabilities原文](https://swag.cispa.saarland/papers/skoruppa2017php.pdf)
